@@ -10,6 +10,7 @@ class EmailProxyMixin(models.AbstractModel):
         'hr.employee': 'work_email',
         'res.company': 'email',
         'res.bank': 'email',
+        'hr.department': 'email',
     }
     _NO_MODEL_NAME_IN_DICT_ERROR = '''
         Please supply _MODEL_NAME_TO_EMAIL_FIELD_NAME_MAPPING class attribute
@@ -27,7 +28,7 @@ class EmailProxyMixin(models.AbstractModel):
                 self._NO_MODEL_NAME_IN_DICT_ERROR % {'model_name': self._name}
             )
         records = super().create(vals_list)
-        self.env['email.proxy'].create([{
+        self.env['res.email'].create([{
             'res_id': record.id,
             'res_model': self._name,
             'email': getattr(record, email_field_name, False)
@@ -38,13 +39,13 @@ class EmailProxyMixin(models.AbstractModel):
         records = super().write(vals)
         email_field_name = self._MODEL_TO_EMAIL_FIELD_MAPPING.get(self._name)
         if vals.get(email_field_name):
-            self.env['email.proxy'].search(self.__get_generic_domain).write({
+            self.env['res.email'].search(self.__get_generic_domain).write({
                 'email': vals[email_field_name],
             })
         return records
 
     def unlink(self):
-        self.env['email.proxy'].search(self.__get_generic_domain).unlink()
+        self.env['res.email'].search(self.__get_generic_domain).unlink()
         super().unlink()
 
     def __get_generic_domain(self):

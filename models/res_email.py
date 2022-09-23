@@ -1,8 +1,8 @@
 from odoo import models, fields
 
 
-class ProxyEmail(models.Model):
-    _name = 'email.proxy'
+class ResEmail(models.Model):
+    _name = 'res.email'
     _description = 'Email proxy'
 
     email = fields.Char()
