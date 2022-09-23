@@ -4,7 +4,7 @@
     'name': 'Email Proxy',
     'author': "Viktor Fedoriv",
     'website': 'https://github.com/Xpshnik/odoo_email_proxy',
-    'version': '14.0.0.0.1',
+    'version': '14.0.0.0.2',
     'description': """ """,
 
     # any module necessary for this one to work correctly
