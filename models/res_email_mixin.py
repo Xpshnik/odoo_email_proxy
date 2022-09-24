@@ -37,10 +37,12 @@ class ResEmailMixin(models.AbstractModel):
         email_field_name = self._email_field_name
         records = super().create(vals_list)
         self.env['res.email'].create([{
-            'res_id': record.id,
-            'res_model': self._name,
-            'email': getattr(record, email_field_name, False)
-        } for record in records])
+                'res_id': record.id,
+                'res_model': self._name,
+                'email': email
+            } for record in records
+            if (email := getattr(record, email_field_name, False))
+        ])
         return records
 
     def write(self, vals):
