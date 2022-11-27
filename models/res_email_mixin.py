@@ -34,19 +34,19 @@ class ResEmailMixin(models.AbstractModel):
 
     @api.model_create_multi
     def create(self, vals_list):
-        email_field_name = self._email_field_name
+        email_field_name = self._get_field_name_or_raise_error()
         records = super().create(vals_list)
         self.env['res.email'].create([{
                 'res_id': record.id,
                 'res_model': self._name,
-                'email': email
+                'email': getattr(record, email_field_name, False)
             } for record in records
-            if (email := getattr(record, email_field_name, False))
+            if getattr(record, email_field_name, False)
         ])
         return records
 
     def write(self, vals):
-        email_field_name = self._email_field_name
+        email_field_name = self._get_field_name_or_raise_error()
         res = super().write(vals)
         email_field_value = vals.get(email_field_name, None)
         if email_field_value:
@@ -74,16 +74,11 @@ class ResEmailMixin(models.AbstractModel):
             ('res_model', '=', self._name),
         ]
 
-    @property
-    def _email_field_name(self):
-        return self._get_field_name_or_raise_error()
-
+    @api.model
     def _get_field_name_or_raise_error(self):
         try:
             return self._MODEL_TO_EMAIL_FIELD_MAPPING[self._name]
         except KeyError:
-            warning_text = self._NO_MODEL_NAME_IN_DICT_ERROR % {
+            raise NotImplementedError(self._NO_MODEL_NAME_IN_DICT_ERROR % {
                 'model_name': self._name
-            }
-            _logger.warning(warning_text)
-            raise NotImplementedError(warning_text)
+            })

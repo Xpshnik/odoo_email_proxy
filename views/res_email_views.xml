@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_res_email_tree" model="ir.ui.view">
+    <field name="name">res.email.tree.view</field>
+    <field name="model">res.email</field>
+    <field name="arch" type="xml">
+      <tree create="0" edit="0">
+        <field name="display_name" string="Name"/>
+        <field name="email"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="view_res_email_tree_search" model="ir.ui.view">
+    <field name="name">res.email.search.view</field>
+    <field name="model">res.email</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name"/>
+      </search>
+    </field>
+  </record>
+
+</odoo>

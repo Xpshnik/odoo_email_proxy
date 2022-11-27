@@ -16,6 +16,7 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'views/res_email_views.xml',
         'views/hr_department_views.xml',
     ],
     'post_init_hook': 'post_init_hook',
