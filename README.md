@@ -14,7 +14,10 @@ Now let's add this new field to a time off form view to see it working:
 As you can see, you can now pick different entities there:
 ![image](https://user-images.githubusercontent.com/100222271/209962997-966c978d-a0fe-4d93-ada5-66a8fced3d36.png)
 
-And each of them has emails associated with them. Here you can see how the essential information is stored in the database. Note that the 'name' (which is the representation of those fields in the dropdown we saw above) is not stored, hence NULL values:
+And each of them has emails associated with them:
+![image](https://user-images.githubusercontent.com/67806773/209964900-4b56797b-caed-4dae-b175-6ab0fa90ec26.png)
+
+Here you can see how the essential information is stored in the database. Note that the 'name' (which is the representation of those fields in the dropdown we saw above) is not stored, hence NULL values:
 ![image](https://user-images.githubusercontent.com/100222271/209963425-f8c348d0-f613-4660-a618-0df1cecb1203.png)
 
 Now you can write some custom logic that would send notifications to the emails of those entities.
