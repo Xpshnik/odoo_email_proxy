@@ -1,0 +1,2 @@
+This is a module that allows to add a field to views that would allow users to choose among all possible emails (from different models) one may want to specify in a field.
+For example, one may want to choose both an email of a department from the module hr.department (which doesn't originally contain a field for email, but it's a reasonable place to add such field to) and emails of some res.partners, too, so that a mail is sent both to a department's mail and to some res.partner's mails, that were all chosen in a single field.
